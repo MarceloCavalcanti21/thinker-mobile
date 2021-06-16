@@ -1,0 +1,12 @@
+{
+  "name": "thinker",
+  "displayName": "thinker",
+  "expo": {
+    "name": "thinker",
+    "slug": "thinker",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
