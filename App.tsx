@@ -1,19 +1,43 @@
+import 'react-native-gesture-handler';
+
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import AppLoading from 'expo-app-loading';
+
+import { PageNavigation } from './src/routes';
+import { NavigationContainer } from '@react-navigation/native';
+
+import { QuestionsContext } from './src/hooks/QuestionsContext';
+import { IQuestionsContext } from './src/hooks/IQuestionsContext';
+
+import { ThemeProvider } from 'styled-components';
+
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_700Bold,
+} from '@expo-google-fonts/poppins';
+
+import theme from './src/global/styles/theme';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
-}
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_700Bold,
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if(!fontsLoaded) {
+    return <AppLoading />;
+  }
+
+  return (
+    <NavigationContainer>
+      <ThemeProvider theme={theme} >
+        <QuestionsContext.Provider value={IQuestionsContext}>
+          <PageNavigation />
+        </QuestionsContext.Provider>
+      </ThemeProvider>
+    </NavigationContainer>
+  )
+}
